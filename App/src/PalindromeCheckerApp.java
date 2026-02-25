@@ -1,38 +1,36 @@
-// MAIN CLASS - UseCase4PalindromeCheckerApp
-// Use Case 4: Character Array Based Palindrome Check
-// This program converts a string into a character array and checks palindrome using two-pointer technique.
+// MAIN CLASS - UseCase5PalindromeCheckerApp
+// Use Case 5: Stack-Based Palindrome Checker
+// This program uses Stack (LIFO) to validate palindrome.
 
-public class UseCase4PalindromeCheckerApp {
+import java.util.Stack;
+
+public class UseCase5PalindromeCheckerApp {
 
     // Application Entry Point
     // JVM starts execution from here
     public static void main(String[] args) {
 
         // Original string
-        String input = "radar";
+        String input = "madam";
 
-        // Convert string to character array
-        char[] characters = input.toCharArray();
+        // Create Stack to store characters
+        Stack<Character> stack = new Stack<>();
 
-        // Initialize two pointers
-        int start = 0;
-        int end = characters.length - 1;
+        // Push each character into stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
 
         // Variable to store palindrome status
         boolean isPalindrome = true;
 
-        // Two-pointer comparison
-        while (start < end) {
-
-            // Compare characters at start and end
-            if (characters[start] != characters[end]) {
+        // Pop characters and compare
+        for (int i = 0; i < input.length(); i++) {
+            char popped = stack.pop();
+            if (input.charAt(i) != popped) {
                 isPalindrome = false;
                 break;
             }
-
-            // Move pointers
-            start++;
-            end--;
         }
 
         // Display input
