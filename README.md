@@ -1,5 +1,5 @@
 # 🧩 Palindrome Checker App
-## Use Case 13 — Performance Comparison (Professional Version)
+
 
 ### 📌 Objective
 To compare execution time of different palindrome validation algorithms.
