@@ -1,47 +1,33 @@
-/**
- *
- * MAIN CLASS - UseCase1PalindromeCheckerApp
- *
- * Use Case 1: Application Entry & Welcome Message
- *
- * Description:
- * This class represents the starting point of the
- * Palindrome Checker Console Application.
- *
- * At this stage, the application:
- * - Displays welcome message
- * - Displays application name
- * - Displays application version
- *
- * No palindrome validation is performed in this use case.
- *
- * @author laksh
- * @version 1.0
- */
+// MAIN CLASS - UseCase2PalindromeCheckerApp
+// Use Case 2: Print a Hardcoded Palindrome Result
+// This program checks whether a hardcoded string is a palindrome.
 
-public class UseCase1PalindromeCheckerApp {
+public class UseCase2PalindromeCheckerApp {
 
-    /**
-     * Application Entry Point
-     * JVM starts execution from here.
-     *
-     * @param args Command-Line arguments
-     */
+    // Application Entry Point
+    // JVM starts execution from here
     public static void main(String[] args) {
 
-        // Welcome Message
-        System.out.println("========================================");
-        System.out.println("      Welcome to Palindrome Checker     ");
-        System.out.println("========================================");
-        System.out.println();
+        // Hardcoded string literal
+        String input = "madam";
 
-        // Application Details
-        System.out.println("Application Name : Palindrome Checker App");
-        System.out.println("Version          : 1.0");
-        System.out.println();
+        // Reverse the string
+        String reversed = "";
 
-        // Flow Control Message
-        System.out.println("Application Started Successfully...");
-        System.out.println("Ready for next use case implementation.");
+        // Loop to reverse the string
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
+
+        // Check palindrome condition using if-else
+        if (input.equals(reversed)) {
+            System.out.println("Input : " + input);
+            System.out.println("Result: It is a Palindrome");
+        } else {
+            System.out.println("Input : " + input);
+            System.out.println("Result: It is NOT a Palindrome");
+        }
+
+        // Program ends
     }
 }
