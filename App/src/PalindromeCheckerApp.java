@@ -1,48 +1,24 @@
-// MAIN CLASS - UseCase10PalindromeCheckerApp
-// Use Case 10: Case-Insensitive & Space-Ignored Palindrome
-// This program ignores spaces and case while checking palindrome.
+// MAIN CLASS - UseCase11PalindromeCheckerApp
+// Use Case 11: Object-Oriented Palindrome Service
+// This program encapsulates palindrome logic in a separate class.
 
-public class UseCase10PalindromeCheckerApp {
+public class UseCase11PalindromeCheckerApp {
 
     // Application Entry Point
     // JVM starts execution from here
     public static void main(String[] args) {
 
-        // Original string with spaces and mixed case
-        String input = "Never Odd Or Even";
+        // Original string
+        String input = "level";
 
-        // Normalize string by removing spaces using regex
-        String noSpaces = input.replaceAll("\\s+", "");
+        // Create instance of PalindromeChecker
+        PalindromeChecker checker = new PalindromeChecker();
 
-        // Convert to lowercase for case-insensitive comparison
-        String normalized = noSpaces.toLowerCase();
+        // Check palindrome
+        boolean isPalindrome = checker.checkPalindrome(input);
 
-        // Initialize two pointers
-        int start = 0;
-        int end = normalized.length() - 1;
-
-        // Variable to store palindrome status
-        boolean isPalindrome = true;
-
-        // Two-pointer comparison
-        while (start < end) {
-
-            // Compare characters
-            if (normalized.charAt(start) != normalized.charAt(end)) {
-                isPalindrome = false;
-                break;
-            }
-
-            // Move pointers
-            start++;
-            end--;
-        }
-
-        // Display original input
-        System.out.println("Original Input  : " + input);
-
-        // Display normalized string
-        System.out.println("Normalized Input: " + normalized);
+        // Display input
+        System.out.println("Input : " + input);
 
         // Display result
         if (isPalindrome) {
@@ -52,5 +28,35 @@ public class UseCase10PalindromeCheckerApp {
         }
 
         // Program ends
+    }
+}
+
+// PalindromeChecker class encapsulates the palindrome logic
+class PalindromeChecker {
+
+    // Method to check palindrome using two-pointer approach
+    public boolean checkPalindrome(String input) {
+
+        // Normalize input to lowercase
+        String normalized = input.toLowerCase();
+
+        // Initialize two pointers
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        // Two-pointer comparison
+        while (start < end) {
+
+            // Compare characters at start and end
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                return false;
+            }
+
+            // Move pointers
+            start++;
+            end--;
+        }
+
+        return true;
     }
 }
