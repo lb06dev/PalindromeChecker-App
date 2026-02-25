@@ -1,128 +1,87 @@
 /**
  *
- * MAIN CLASS - LindromeCheckerApp
+ * MAIN CLASS - UseCase6PalindromeCheckerApp
  *
- * Use Case 5
+ * Use Case 6: Queue + Stack Based Palindrome Check
  *
  * Description:
- * This class measures and compares the execution
- * performance of different palindrome validation algorithms.
+ * This class demonstrates palindrome validation
+ * using both Queue (FIFO) and Stack (LIFO) data structures.
  *
- * At this stage, the application:
- * - Uses multiple palindrome validation implementations
- * - Captures execution start and end times
- * - Calculates total execution durations
- * - Displays benchmarking results
+ * The goal is to show how First In First Out (Queue)
+ * and Last In First Out (Stack) behaviors can be compared
+ * to validate palindrome strings.
  *
- * This use case focuses on performance
- * measurement and algorithm comparison to
- * introduce benchmarking concepts.
+ * Flow:
+ * 1. Enqueue characters into Queue
+ * 2. Push characters into Stack
+ * 3. Compare Dequeue vs Pop outputs
+ * 4. Determine whether input is a palindrome
+ *
+ * Key Concepts:
+ * - Queue: Follows FIFO (First In First Out)
+ * - Stack: Follows LIFO (Last In First Out)
+ * - Logical Comparison: Compare elements popped from stack
+ *   with elements dequeued from queue to validate palindrome
+ *
+ * Data Structures Used: Queue, Stack
  *
  * @author laksh
- * @version 5
+ * @version 6.0
  */
 
-public class LindromeCheckerApp {
+import java.util.*;
+
+public class UseCase6PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC13.
+     * Application entry point for UC6.
      *
      * @param args Command-Line arguments
      */
     public static void main(String[] args) {
 
-        String input = "LeveL";
-        String normalized = input.toLowerCase();
-
+        Scanner scanner = new Scanner(System.in);
         System.out.println("=====================================");
-        System.out.println("         LINDROME CHECKER APP        ");
+        System.out.println("       LINDROME CHECKER APP - UC6    ");
         System.out.println("=====================================");
-        System.out.println("Input : " + input);
-        System.out.println();
+        System.out.print("Enter a string to check palindrome: ");
+        String input = scanner.nextLine();
 
-        // ==============================
-        // Two Pointer Benchmark
-        // ==============================
-        long start1 = System.nanoTime();
-        boolean result1 = twoPointer(normalized);
-        long end1 = System.nanoTime();
+        String normalized = input.toLowerCase().replaceAll("\\s+", ""); // Ignore case and spaces
 
-        // ==============================
-        // Stack Benchmark
-        // ==============================
-        long start2 = System.nanoTime();
-        boolean result2 = stackMethod(normalized);
-        long end2 = System.nanoTime();
+        boolean isPalindrome = isPalindromeUsingQueueAndStack(normalized);
 
-        // ==============================
-        // Recursive Benchmark
-        // ==============================
-        long start3 = System.nanoTime();
-        boolean result3 = recursive(normalized, 0, normalized.length() - 1);
-        long end3 = System.nanoTime();
+        System.out.println("-------------------------------------");
+        System.out.println("Input Text  : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("-------------------------------------");
 
-        // ==============================
-        // Output Results
-        // ==============================
-        System.out.println("Palindrome Check Results:");
-        System.out.println("Two Pointer : " + result1);
-        System.out.println("Stack       : " + result2);
-        System.out.println("Recursive   : " + result3);
-        System.out.println();
-        System.out.println("Execution Time Comparison (in ns):");
-        System.out.println("Two Pointer : " + (end1 - start1));
-        System.out.println("Stack       : " + (end2 - start2));
-        System.out.println("Recursive   : " + (end3 - start3));
+        scanner.close();
     }
 
-    // ------------------------------
-    // Two Pointer Method
-    // ------------------------------
-    private static boolean twoPointer(String input) {
-        int start = 0;
-        int end = input.length() - 1;
+    /**
+     * Method: isPalindromeUsingQueueAndStack
+     * Description: Checks palindrome using both Queue and Stack
+     */
+    private static boolean isPalindromeUsingQueueAndStack(String input) {
 
-        while (start < end) {
-            if (input.charAt(start) != input.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
-        }
-        return true;
-    }
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
 
-    // ------------------------------
-    // Stack Method
-    // ------------------------------
-    private static boolean stackMethod(String input) {
-        java.util.Stack<Character> stack = new java.util.Stack<>();
-
+        // Enqueue and Push each character
         for (char c : input.toCharArray()) {
-            stack.push(c);
+            queue.add(c);  // FIFO
+            stack.push(c); // LIFO
         }
 
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+        // Compare dequeue vs pop
+        while (!queue.isEmpty() && !stack.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
                 return false;
             }
         }
+
         return true;
-    }
-
-    // ------------------------------
-    // Recursive Method
-    // ------------------------------
-    private static boolean recursive(String input, int start, int end) {
-
-        if (start >= end) {
-            return true;
-        }
-
-        if (input.charAt(start) != input.charAt(end)) {
-            return false;
-        }
-
-        return recursive(input, start + 1, end - 1);
     }
 }
