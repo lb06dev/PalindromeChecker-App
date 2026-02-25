@@ -1,29 +1,28 @@
 /**
  *
-         * MAIN CLASS - UseCase13PalindromeCheckerApp
+ * MAIN CLASS - LindromeCheckerApp
  *
-         * Use Case 13: Performance Comparison
+ * Use Case 5
  *
-         * Description:
-        * This class measures and compares the execution
- * performance of palindrome validation algorithms.
+ * Description:
+ * This class measures and compares the execution
+ * performance of different palindrome validation algorithms.
  *
-         * At this stage, the application:
-        * - Uses palindrome validation implementations
- * - Captures execution start and end time
- * - Calculates total execution duration
+ * At this stage, the application:
+ * - Uses multiple palindrome validation implementations
+ * - Captures execution start and end times
+ * - Calculates total execution durations
  * - Displays benchmarking results
  *
-         * This use case focuses purely on performance
- * measurement and algorithm comparison.
-        *
-        * The goal is to introduce benchmarking concepts.
+ * This use case focuses on performance
+ * measurement and algorithm comparison to
+ * introduce benchmarking concepts.
  *
-         * @author laksh
- * @version 13.0
-        */
+ * @author laksh
+ * @version 5
+ */
 
-public class UseCase13PalindromeCheckerApp {
+public class LindromeCheckerApp {
 
     /**
      * Application entry point for UC13.
@@ -35,6 +34,9 @@ public class UseCase13PalindromeCheckerApp {
         String input = "LeveL";
         String normalized = input.toLowerCase();
 
+        System.out.println("=====================================");
+        System.out.println("         LINDROME CHECKER APP        ");
+        System.out.println("=====================================");
         System.out.println("Input : " + input);
         System.out.println();
 
@@ -59,12 +61,18 @@ public class UseCase13PalindromeCheckerApp {
         boolean result3 = recursive(normalized, 0, normalized.length() - 1);
         long end3 = System.nanoTime();
 
-        System.out.println("Is Palindrome? : " + result1);
+        // ==============================
+        // Output Results
+        // ==============================
+        System.out.println("Palindrome Check Results:");
+        System.out.println("Two Pointer : " + result1);
+        System.out.println("Stack       : " + result2);
+        System.out.println("Recursive   : " + result3);
         System.out.println();
-        System.out.println("Execution Time Comparison:");
-        System.out.println("Two Pointer : " + (end1 - start1) + " ns");
-        System.out.println("Stack       : " + (end2 - start2) + " ns");
-        System.out.println("Recursive   : " + (end3 - start3) + " ns");
+        System.out.println("Execution Time Comparison (in ns):");
+        System.out.println("Two Pointer : " + (end1 - start1));
+        System.out.println("Stack       : " + (end2 - start2));
+        System.out.println("Recursive   : " + (end3 - start3));
     }
 
     // ------------------------------
