@@ -1,71 +1,103 @@
-# 🧩 Palindrome Checker App
-## Use Case 13 — Performance Comparison (Professional Version)
+// MAIN CLASS - UseCase12PalindromeCheckerApp
+// Use Case 12: Strategy Pattern for Palindrome Algorithms
+// This program demonstrates dynamic selection of palindrome algorithms using Strategy Pattern.
 
-### 📌 Objective
-To compare execution time of different palindrome validation algorithms.
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.Stack;
 
----
+public class UseCase12PalindromeCheckerApp {
 
-## 📖 Description
+    // Application Entry Point
+    // JVM starts execution from here
+    public static void main(String[] args) {
 
-This implementation benchmarks multiple algorithms:
+        // Original string
+        String input = "madam";
 
-1. Two Pointer Method
-2. Stack Based Method
-3. Recursive Method
+        // Choose strategy dynamically
+        PalindromeStrategy strategy;
 
-Execution time is measured using:
+        // Example: use Stack strategy
+        strategy = new StackStrategy();
+        System.out.println("Using Stack Strategy:");
+        displayResult(input, strategy);
 
-System.nanoTime()
+        // Example: use Deque strategy
+        strategy = new DequeStrategy();
+        System.out.println("\nUsing Deque Strategy:");
+        displayResult(input, strategy);
 
-Each algorithm is executed separately and total execution duration is displayed.
+        // Program ends
+    }
 
----
+    // Helper method to display result
+    private static void displayResult(String input, PalindromeStrategy strategy) {
+        boolean result = strategy.isPalindrome(input);
+        System.out.println("Input : " + input);
+        if (result) {
+            System.out.println("Result: It is a Palindrome");
+        } else {
+            System.out.println("Result: It is NOT a Palindrome");
+        }
+    }
+}
 
-## 🔑 Key Concepts Used
+// Strategy interface
+interface PalindromeStrategy {
 
-- System.nanoTime()
-- Algorithm benchmarking
-- Performance comparison
-- Time complexity awareness
-- Recursion vs Iteration
+    // Method to check palindrome
+    boolean isPalindrome(String input);
+}
 
----
+// Stack-based palindrome strategy
+class StackStrategy implements PalindromeStrategy {
 
-## ⚙️ Algorithms Compared
+    @Override
+    public boolean isPalindrome(String input) {
 
-| Algorithm     | Time Complexity | Space Complexity |
-|--------------|----------------|-----------------|
-| Two Pointer  | O(n)           | O(1)            |
-| Stack        | O(n)           | O(n)            |
-| Recursive    | O(n)           | O(n) (call stack)|
+        // Normalize input
+        String normalized = input.toLowerCase();
 
----
+        // Use Stack to reverse
+        Stack<Character> stack = new Stack<>();
+        for (char c : normalized.toCharArray()) {
+            stack.push(c);
+        }
 
-## 🖥 Sample Output
+        // Compare by popping
+        for (char c : normalized.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
 
-Input : Level
+        return true;
+    }
+}
 
-Is Palindrome? : true
+// Deque-based palindrome strategy
+class DequeStrategy implements PalindromeStrategy {
 
-Execution Time Comparison:
-Two Pointer : 84000 ns
-Stack       : 126000 ns
-Recursive   : 91000 ns
+    @Override
+    public boolean isPalindrome(String input) {
 
-(Note: Execution time varies each run)
+        // Normalize input
+        String normalized = input.toLowerCase();
 
----
+        // Use Deque
+        Deque<Character> deque = new ArrayDeque<>();
+        for (char c : normalized.toCharArray()) {
+            deque.addLast(c);
+        }
 
-## ▶️ Compile & Run
+        // Compare front and rear
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
 
-Compile:
-javac UseCase13PalindromeCheckerApp.java
-
-Run:
-java UseCase13PalindromeCheckerApp
-
----
-
-## 👨‍💻 Author
-laksh
+        return true;
+    }
+}
