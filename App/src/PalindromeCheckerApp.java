@@ -1,31 +1,33 @@
-// MAIN CLASS - UseCase2PalindromeCheckerApp
-// Use Case 2: Print a Hardcoded Palindrome Result
-// This program checks whether a hardcoded string is a palindrome.
+// MAIN CLASS - UseCase3PalindromeCheckerApp
+// Use Case 3: Palindrome Check Using String Reverse
+// This program reverses a string using a loop and checks if it is a palindrome.
 
-public class UseCase2PalindromeCheckerApp {
+public class UseCase3PalindromeCheckerApp {
 
     // Application Entry Point
     // JVM starts execution from here
     public static void main(String[] args) {
 
-        // Hardcoded string literal
-        String input = "madam";
+        // Original string
+        String input = "level";
 
-        // Reverse the string
+        // Variable to store reversed string
         String reversed = "";
 
-        // Loop to reverse the string
+        // Reverse the string using for loop
         for (int i = input.length() - 1; i >= 0; i--) {
             reversed = reversed + input.charAt(i);
         }
 
-        // Check palindrome condition using if-else
+        // Display original and reversed string
+        System.out.println("Original String : " + input);
+        System.out.println("Reversed String : " + reversed);
+
+        // Compare using equals() method
         if (input.equals(reversed)) {
-            System.out.println("Input : " + input);
-            System.out.println("Result: It is a Palindrome");
+            System.out.println("Result : It is a Palindrome");
         } else {
-            System.out.println("Input : " + input);
-            System.out.println("Result: It is NOT a Palindrome");
+            System.out.println("Result : It is NOT a Palindrome");
         }
 
         // Program ends
